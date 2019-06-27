@@ -6,12 +6,12 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  ir_planning
+  bica_planning
   tf
   geometry_msgs
   nav_msgs
   visualization_msgs
-  bica_core
+  bica
   move_base_msgs
   sensor_msgs
   std_msgs

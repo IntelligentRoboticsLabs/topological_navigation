@@ -37,7 +37,7 @@
 #define TOPOLOGICAL_NAVIGATION_TOPOLOGICALNAV_H_
 
 #include <ros/ros.h>
-#include <ir_planning/KMSClient.h>
+#include <bica_planning/KMSClient.h>
 #include <geometry_msgs/Pose.h>
 #include <topological_navigation_msgs/GetLocation.h>
 #include <topological_navigation_msgs/SetLocation.h>
@@ -51,7 +51,7 @@
 
 namespace topological_navigation
 {
-class TopologicalNav : public ir_planning::KMSClient
+class TopologicalNav : public bica_planning::KMSClient
 {
 public:
   TopologicalNav();

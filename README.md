@@ -16,8 +16,8 @@
 - **Dependencies:**
   - **ROS Standard:** roscpp, rospy, tf, geometry_msgs, std_msgs, sensor_msgs, nav_msgs, visualization_msgs, move_base_msgs, actionlib, actionlib_msgs, cv_bridge, costmap_2d, image_transport, roslint
   - **Internals:**
-     - bica_core: https://gitlab.com/fmrico/bica.git
-     - ir_planning: https://gitlab.com/Intelligent-Robotics/ir_planning.git
+     - bica: https://gitlab.com/fmrico/bica.git
+     - bica_planning: https://gitlab.com/Intelligent-Robotics/bica_planning.git
      - ROSPLan: https://gitlab.com/Intelligent-Robotics/ROSPlan.git
      - pepper_navigation_bringup: https://gitlab.com/Intelligent-Robotics/pepper_navigation_bringup.git
      - pepper_basic_capabilities: https://gitlab.com/Intelligent-Robotics/pepper_basic_capabilities.git
@@ -90,5 +90,5 @@ This package contains 2 launch files:
 
 - **topological_navigation_alone.launch:** This launcher is made for testing the package isolated. It launchs the tological_navigation_node and all the actions.
 - **topological_navigation.launch:** This launcher is made for being integrated (via including) in a complete application. 2 args must be defined:
-  - **pddl_domain_file**: The absolute path of the domain file (the output of pddl_builder in package ir_planning)
+  - **pddl_domain_file**: The absolute path of the domain file (the output of pddl_builder in package bica_planning)
   - **topological_map**: The yaml file containing the definition of the topological map.

@@ -49,7 +49,7 @@
 #include "geometry_msgs/PoseStamped.h"
 #include "std_srvs/Empty.h"
 
-#include <ir_planning/Action.h>
+#include <bica_planning/Action.h>
 #include <topological_navigation_msgs/GetLocation.h>
 #include <pepper_basic_capabilities_msgs/EngageMode.h>
 #include <pepper_basic_capabilities_msgs/ShowWeb.h>
@@ -58,7 +58,7 @@
 #ifndef KCL_cross
 #define KCL_cross
 
-class RP_cross : public ir_planning::Action
+class RP_cross : public bica_planning::Action
 {
 public:
   explicit RP_cross(ros::NodeHandle& nh);

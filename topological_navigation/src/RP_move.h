@@ -47,7 +47,7 @@
 #include "move_base_msgs/MoveBaseAction.h"
 #include "geometry_msgs/PoseStamped.h"
 #include "std_srvs/Empty.h"
-#include <ir_planning/Action.h>
+#include <bica_planning/Action.h>
 #include <topological_navigation_msgs/GetLocation.h>
 #include <pepper_basic_capabilities_msgs/DoTalk.h>
 #include <pepper_basic_capabilities_msgs/EngageMode.h>
@@ -56,7 +56,7 @@
 #ifndef KCL_move
 #define KCL_move
 
-class RP_move : public ir_planning::Action
+class RP_move : public bica_planning::Action
 {
 public:
   explicit RP_move(ros::NodeHandle& nh);

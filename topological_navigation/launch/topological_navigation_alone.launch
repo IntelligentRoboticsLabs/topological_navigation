@@ -7,12 +7,12 @@
   <arg name="map" default="$(find pepper_navigation_bringup)/maps/dummy_map.yaml"/>
 
   <!-- External requirements -->
-  <node name="pddl_builder" pkg="ir_planning" type="pddl_builder.py" respawn="false" output="screen">
+  <node name="pddl_builder" pkg="bica_planning" type="pddl_builder.py" respawn="false" output="screen">
       <rosparam param="pddl_packages" subst_value="True">$(arg pddl_packages)</rosparam>
       <param name="pddl_domain_file" value="$(arg pddl_domain_file)" />
   </node>
 
-  <include file="$(find ir_planning)/launch/planning_system.launch" >
+  <include file="$(find bica_planning)/launch/planning_system.launch" >
     <arg name="data_path" value="/tmp" />
     <arg name="domain_path"  value="$(arg pddl_domain_file)" />
   </include>

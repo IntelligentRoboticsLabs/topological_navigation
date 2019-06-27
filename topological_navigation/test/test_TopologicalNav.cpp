@@ -199,7 +199,7 @@ TEST(TESTSuite, test_load_map1)
   EXPECT_EQ(aux2.orientation.w, aux.orientation.w);
 }
 
-class TestKMS : public ir_planning::KMSClient
+class TestKMS : public bica_planning::KMSClient
 {
 public:
   TestKMS()
