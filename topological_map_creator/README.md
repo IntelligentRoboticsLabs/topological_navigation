@@ -1,7 +1,7 @@
 # Topological Map Creator
 **Topological Map Creator simplifies the task of build a topological map of a scenario.**
 
-Using this tool you could create in a simple way a topological map with waypoints and doors. The output of the tool will be a .yaml file that could be use by the ([topological_navigation] (https://gitlab.com/fmrico/topological_navigation/tree/develop))
+Using this tool you could create in a simple way a topological map with waypoints and doors. The output of the tool will be a .yaml file that could be use by the **topological_navigation**.
 
 ## Packages
 
