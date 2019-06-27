@@ -1,0 +1,6 @@
+<launch>
+  <arg name="map_file" default="$(find gb_robots)/maps/restaurant/map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <node name="tm_creator_node" pkg="topological_map_creator" type="tm_creator_node" output="screen" />
+  <node pkg="tf" type="static_transform_publisher" name="bl2map" args="0.0 0.0 0 0 0 0 1 base_link map 100" />
+</launch>

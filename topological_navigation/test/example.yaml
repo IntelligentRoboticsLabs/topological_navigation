@@ -1,0 +1,17 @@
+room_ids: [bar, party, outdoor]
+door_ids: [maindoor]
+connections: [party_to_bar, bar_to_outdoor]
+waypoints_ids: [wp_bar_1, wp_bar_2, wp_bar_3, wp_party]
+party_to_bar:
+  rooms: [party, bar]
+
+bar_to_outdoor:
+  rooms: [bar, outdoor]
+
+wp_bar_1: {room: bar, position: "5.094531, 4.444628, -0.037184"}
+
+wp_bar_2: {room: bar, position: "5.118153, 0.742420, 0.036880"}
+
+wp_bar_3: {room: outdoor, position: "8.632131, 2.211160, -1.506804"}
+
+wp_party: {room: party, position: "2.728663, 6.092816, -1.627602"}

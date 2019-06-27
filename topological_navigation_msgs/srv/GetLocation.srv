@@ -1,0 +1,3 @@
+string waypoint
+---
+geometry_msgs/Pose position

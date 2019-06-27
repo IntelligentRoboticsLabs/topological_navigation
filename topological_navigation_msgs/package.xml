@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>topological_navigation_msgs</name>
+  <version>0.0.1</version>
+  <description>The topological_navigation_msgs package</description>
+
+  <maintainer email="fmrico@gmail.com">Francisco Martín Rico</maintainer>
+	<author email="fmrico@gmail.com">Francisco Martín Rico</author>
+
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <build_export_depend>geometry_msgs</build_export_depend>
+
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>message_generation</exec_depend>
+
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

@@ -1,0 +1,4 @@
+waypoint
+door
+room
+robot

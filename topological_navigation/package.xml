@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>topological_navigation</name>
+  <version>0.0.1</version>
+  <description>Topological navigation package</description>
+
+  <maintainer email="fmrico@gmail.com">Francisco Martín Rico</maintainer>
+	<author email="fmrico@gmail.com">Francisco Martín Rico</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>ir_planning</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_depend>bica_core</build_depend>
+  <build_depend>move_base_msgs</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>costmap_2d</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>topological_navigation_msgs</build_depend>
+  <build_depend>pepper_basic_capabilities_msgs</build_depend>
+  <build_depend>roslint</build_depend>
+
+  <build_export_depend>ir_planning</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>tf</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>nav_msgs</build_export_depend>
+  <build_export_depend>visualization_msgs</build_export_depend>
+  <build_export_depend>bica_core</build_export_depend>
+  <build_export_depend>move_base_msgs</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
+  <build_export_depend>cv_bridge</build_export_depend>
+  <build_export_depend>costmap_2d</build_export_depend>
+  <build_export_depend>image_transport</build_export_depend>
+  <build_export_depend>topological_navigation_msgs</build_export_depend>
+  <build_export_depend>pepper_basic_capabilities_msgs</build_export_depend>
+
+  <exec_depend>ir_planning</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>visualization_msgs</exec_depend>
+  <exec_depend>bica_core</exec_depend>
+  <exec_depend>move_base_msgs</exec_depend>
+  <exec_depend>actionlib</exec_depend>
+  <exec_depend>actionlib_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>costmap_2d</exec_depend>
+  <exec_depend>image_transport</exec_depend>
+  <exec_depend>topological_navigation_msgs</exec_depend>
+  <exec_depend>pepper_basic_capabilities_msgs</exec_depend>
+
+
+  <export>
+
+  </export>
+</package>

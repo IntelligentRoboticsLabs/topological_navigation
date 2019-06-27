@@ -1,0 +1,204 @@
+room_ids: ["outdoor_in", "outdoor_out", "corridor", "kitchen", "diningroom", livingroom", "bedroom"]
+door_ids: ["maindoor_to_corridor", "corridor_to_maindoor",
+           "backdoor_to_livingroom", "livingroom_to_backdoor",
+           "kitchen_to_bedroom", "bedroom_to_kitchen",
+           "livingroom_to_bedroom", "bedroom_to_livingroom"]
+
+connections: ["corridor_to_kitchen", "corridor_to_livingroom", "corridor_to_diningroom",
+              "kitchen_to_livingroom", "kitchen_to_diningroom",
+              "livingroom_to_diningroom"]
+
+waypoints_ids: ["wp_maindoor_to_corridor", "wp_corridor_from_maindoor",
+                "wp_corridor_to_maindoor", "wp_maindoor_from_corridor",
+                "wp_backdoor_to_livingroom", "wp_livingroom_from_backdoor",
+                "wp_livingroom_to_backdoor", "wp_backdoor_from_livingroom",
+                "wp_bedroom_to_kitchen", "wp_kitchen_from_bedroom",
+                "wp_kitchen_to_bedroom", "wp_bedroom_from_kitchen",
+                "wp_bedroom_to_livingroom", "wp_livingroom_from_bedroom",
+                "wp_livingroom_to_bedroom", "wp_bedroom_from_livingroom",
+                "wp_inspection", "wp_party", "wp_bar", "wp_outdoor", "wp_gpsr",
+                "wp_spr", "wp_diningroom", "wp_livingroom", "wp_kitchen", "wp_bedroom"]
+
+corridor_to_kitchen: {
+        rooms: ["corridor", "kitchen"]
+}
+corridor_to_livingroom: {
+        rooms: ["corridor", "livingroom"]
+}
+corridor_to_diningroom: {
+        rooms: ["corridor", "diningroom"]
+}
+kitchen_to_livingroom: {
+        rooms: ["kitchen", "livingroom"]
+}
+kitchen_to_diningroom: {
+        rooms: ["kitchen", "diningroom"]
+}
+livingroom_to_diningroom: {
+        rooms: ["livingroom", "diningroom"]
+}
+
+
+
+maindoor_to_corridor: {
+    waypoints: ["wp_maindoor_to_corridor", "wp_corridor_from_maindoor"]
+}
+
+corridor_to_maindoor: {
+    waypoints: ["wp_corridor_to_maindoor", "wp_maindoor_from_corridor"]
+}
+
+backdoor_to_livingroom: {
+    waypoints: ["wp_backdoor_to_livingroom", "wp_livingroom_from_backdoor"]
+}
+
+livingroom_to_backdoor: {
+    waypoints: ["wp_livingroom_to_backdoor", "wp_backdoor_from_livingroom"]
+}
+
+kitchen_to_bedroom: {
+    waypoints: ["wp_kitchen_to_bedroom", "wp_bedroom_from_kitchen"]
+}
+
+bedroom_to_kitchen: {
+    waypoints: ["wp_bedroom_to_kitchen", "wp_kitchen_from_bedroom"]
+}
+livingroom_to_bedroom: {
+    waypoints: ["wp_livingroom_to_bedroom", "wp_bedroom_from_livingroom"]
+}
+
+bedroom_to_livingroom: {
+    waypoints: ["wp_bedroom_to_livingroom", "wp_livingroom_from_bedroom"]
+}
+
+
+
+wp_maindoor_to_corridor: {
+    room: "outdoor_in",
+    position: "8.5, 12.5, -1.5707"
+}
+
+wp_corridor_from_maindoor: {
+    room: "corridor",
+    position: "8.5, 11.5, -1.5707"
+}
+
+wp_corridor_to_maindoor: {
+    room: "corridor",
+    position: "8.5, 11.5, 1.5707"
+}
+
+wp_maindoor_from_corridor: {
+    room: "outdoor_in",
+    position: "8.5, 12.5, 1.5707"
+}
+
+wp_backdoor_to_livingroom: {
+    room: "outdoor_out",
+    position: "-0.5, 0.5, 0.0"
+}
+
+wp_livingroom_from_backdoor: {
+    room: "livingroom",
+    position: "0.5, 0.5, 0.0"
+}
+
+wp_livingroom_to_backdoor: {
+    room: "livingroom",
+    position: "0.5, 0.5, 3.14"
+}
+
+wp_backdoor_from_livingroom: {
+    room: "outdoor_out",
+    position: "-0.5, 0.5, 3.14"
+}
+
+wp_kitchen_to_bedroom: {
+    room: "kitchen",
+    position: "8.0, 4.5, -1.5707"
+}
+
+wp_kitchen_from_bedroom: {
+    room: "kitchen",
+    position: "8.0, 4.5, -1.5707"
+}
+
+wp_bedroom_from_kitchen: {
+    room: "bedroom",
+    position: "8.0, 3.5, -1.5707"
+}
+
+wp_bedroom_to_kitchen: {
+    room: "bedroom",
+    position: "8.0, 3.5, 1.5707"
+}
+
+wp_livingroom_to_bedroom: {
+    room: "livingroom",
+    position: "4.5, 2.0, 0.0"
+}
+
+wp_bedroom_from_livingroom: {
+    room: "bedroom",
+    position: "5.5, 2.0, 0.0"
+}
+
+wp_bedroom_to_livingroom: {
+    room: "bedroom",
+    position: "5.5, 2.0, 3.14"
+}
+
+wp_livingroom_from_bedroom: {
+    room: "livingroom",
+    position: "4.5, 2.0, 3.14"
+}
+
+wp_inspection: {
+    room: "livingroom",
+    position: "3.0, 3.0, -1.5707"
+}
+
+wp_party: {
+    room: "livingroom",
+    position: "2.0, 3.0, 2.9"
+}
+
+wp_bar: {
+    room: "kitchen",
+    position: "5.7, 5.3, 1.5707"
+}
+
+wp_outdoor: {
+    room: "outdoor_in",
+    position: "3.0, 3.0, -1.5707"
+}
+
+wp_gpsr: {
+    room: "livingroom",
+    position: "7.0, 6.5, -1.5707"
+}
+
+wp_spr: {
+    room: "livingroom",
+    position: "3.0, 3.0, -1.5707"
+}
+
+wp_diningroom: {
+    room: "diningroom",
+    position: "3.5, 6.0, 3.14"
+}
+
+wp_livingroom: {
+    room: "diningroom",
+    position: "3.0, 3.0, -1.57"
+}
+
+wp_bedroom: {
+    room: "bedroom",
+    position: "6.0, 2.5, -1.57"
+}
+
+wp_kitchen: {
+    room: "kitchen",
+    position: "7.0, 6.0, -1.57"
+}

@@ -1,0 +1,54 @@
+<launch>
+  <arg name="topological_map" />
+  <arg name="map"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
+  <arg name="action_duration"		default="0.0" />
+	<arg name="action_probability"	default="1.0" />
+	<arg name="knowledge_base"		default="rosplan_knowledge_base" />
+  <arg name="action_dispatch_topic"	default="/rosplan_plan_dispatcher/action_dispatch" />
+	<arg name="action_feedback_topic"	default="/rosplan_plan_dispatcher/action_feedback" />
+
+
+  <!-- Topological Navigation node -->
+  <node name="topological_navigation" pkg="topological_navigation" type="topological_navigation_node">
+    <rosparam file="$(arg topological_map)" command="load" />
+  </node>
+
+  <!-- Actions node -->
+  <node name="rosplan_interface_move" pkg="topological_navigation" type="rp_move" respawn="false" output="screen">
+    <param name="knowledge_base"		value="$(arg knowledge_base)" />
+    <param name="pddl_action_name" value="move" />
+    <param name="action_duration"		value="$(arg action_duration)" />
+    <param name="action_probability"	value="$(arg action_probability)" />
+    <param name="action_dispatch_topic" value="$(arg action_dispatch_topic)"/>
+    <param name="action_feedback_topic" value="$(arg action_feedback_topic)" />
+  </node>
+
+  <node name="rosplan_interface_cross" pkg="topological_navigation" type="rp_cross" respawn="false" output="screen">
+    <param name="knowledge_base"		value="$(arg knowledge_base)" />
+    <param name="pddl_action_name" value="cross" />
+    <param name="action_duration"		value="$(arg action_duration)" />
+    <param name="action_probability"	value="$(arg action_probability)" />
+    <param name="action_dispatch_topic" value="$(arg action_dispatch_topic)"/>
+    <param name="action_feedback_topic" value="$(arg action_feedback_topic)" />
+  </node>
+
+  <node name="rosplan_interface_navigate" pkg="topological_navigation" type="rp_navigate" respawn="false" output="screen">
+    <param name="knowledge_base"		value="$(arg knowledge_base)" />
+    <param name="pddl_action_name" value="navigate" />
+    <param name="action_duration"		value="$(arg action_duration)" />
+    <param name="action_probability"	value="$(arg action_probability)" />
+    <param name="action_dispatch_topic" value="$(arg action_dispatch_topic)"/>
+    <param name="action_feedback_topic" value="$(arg action_feedback_topic)" />
+  </node>
+
+  <!-- Include ROS navigation stack -->
+  <include file="$(find pepper_navigation_bringup)/launch/navigation.launch">
+    <arg name="map_file" value="$(arg map)"/>
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+</launch>

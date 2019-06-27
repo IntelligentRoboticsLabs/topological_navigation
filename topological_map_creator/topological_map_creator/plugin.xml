@@ -1,0 +1,20 @@
+<library path="lib/libtm_creator">
+  <class name="tm_creator" type="tm_creator::TMCreator" base_class_type="rqt_gui_cpp::Plugin">
+    <description>
+      Topological map creator
+    </description>
+    <qtgui>
+      <!-- optional grouping...
+      <group>
+        <label>Group</label>
+      </group>
+      <group>
+        <label>Subgroup</label>
+      </group>
+      -->
+      <label>Topological map creator</label>
+      <icon type="theme">applications-utilities</icon>
+      <statustip>TM Creator.</statustip>
+    </qtgui>
+  </class>
+</library>
