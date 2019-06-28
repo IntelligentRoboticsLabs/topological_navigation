@@ -27,7 +27,6 @@
   <build_depend>costmap_2d</build_depend>
   <build_depend>image_transport</build_depend>
   <build_depend>topological_navigation_msgs</build_depend>
-  <build_depend>pepper_basic_capabilities_msgs</build_depend>
   <build_depend>roslint</build_depend>
 
   <build_export_depend>bica_planning</build_export_depend>
@@ -45,7 +44,6 @@
   <build_export_depend>costmap_2d</build_export_depend>
   <build_export_depend>image_transport</build_export_depend>
   <build_export_depend>topological_navigation_msgs</build_export_depend>
-  <build_export_depend>pepper_basic_capabilities_msgs</build_export_depend>
 
   <exec_depend>bica_planning</exec_depend>
   <exec_depend>roscpp</exec_depend>
@@ -64,8 +62,6 @@
   <exec_depend>costmap_2d</exec_depend>
   <exec_depend>image_transport</exec_depend>
   <exec_depend>topological_navigation_msgs</exec_depend>
-  <exec_depend>pepper_basic_capabilities_msgs</exec_depend>
-
 
   <export>
 

@@ -47,32 +47,10 @@
 RP_navigate::RP_navigate(ros::NodeHandle& nh) : nh_(nh), Action("navigate"), action_client_("/move_base", false)
 {
   srv_goal_ = nh_.serviceClient<topological_navigation_msgs::GetLocation>("/topological_navigation/get_location");
-  message_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::DoTalk>("/pepper_basic_capabilities/talk", 1);
-  web_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::ShowWeb>("/pepper_basic_capabilities/show_tablet_web");
-  engage_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::EngageMode>("/pepper_basic_capabilities/engage_mode");
-}
-
-void RP_navigate::talk(std::string s)
-{
-  pepper_basic_capabilities_msgs::DoTalk srv;
-  srv.request.sentence = s;
-  message_srv.call(srv);
-}
-
-void RP_navigate::attentionOn()
-{
-  pepper_basic_capabilities_msgs::EngageMode engage_msg_;
-  engage_msg_.request.mode = "off";
-  engage_srv.call(engage_msg_);
 }
 
 void RP_navigate::activateCode()
 {
-  /* HRI tablet */
-  pepper_basic_capabilities_msgs::ShowWeb w_srv;
-  w_srv.request.url = "common/navigating.html";
-  web_srv.call(w_srv);
-
   while (!action_client_.waitForServer(ros::Duration(5.0)))
   {
     ROS_INFO("[navigate] Waiting for the move_base action server to come up");
@@ -104,11 +82,6 @@ void RP_navigate::activateCode()
   }
 
   goal_pose_.pose = *(results[0]);
-  // std::string speech_msg;
-  // speech_msg = "Nice! I will navigate to the next waypoint.";
-  // speech_msg = "Moviéndome!.";
-  // talk(speech_msg);
-
   ROS_INFO("[navigate]Commanding to [%s] (%f %f)", wpID.c_str(), goal_pose_.pose.position.x, goal_pose_.pose.position.y);
 
   move_base_msgs::MoveBaseGoal goal;

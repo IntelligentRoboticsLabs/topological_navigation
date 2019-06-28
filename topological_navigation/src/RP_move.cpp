@@ -47,16 +47,6 @@
 RP_move::RP_move(ros::NodeHandle& nh) : nh_(nh), Action("move_to"), action_client_("/move_base", false)
 {
   srv_goal_ = nh_.serviceClient<topological_navigation_msgs::GetLocation>("/topological_navigation/get_location");
-  message_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::DoTalk>("/pepper_basic_capabilities/talk", 1);
-  engage_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::EngageMode>("/pepper_basic_capabilities/engage_mode");
-  web_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::ShowWeb>("/pepper_basic_capabilities/show_tablet_web");
-}
-
-void RP_move::talk(std::string s)
-{
-  pepper_basic_capabilities_msgs::DoTalk srv;
-  srv.request.sentence = s;
-  message_srv.call(srv);
 }
 
 void RP_move::activateCode()
@@ -97,11 +87,6 @@ void RP_move::activateCode()
   }
 
   goal_pose_.pose = *(results[0]);
-  // std::string speech_msg;
-  // speech_msg = "Nice! I will navigate to the next waypoint.";
-  // speech_msg = "Moviéndome!.";
-  // talk(speech_msg);
-  attentionOn();
 
   ROS_INFO("[move_to]Commanding to [%s] (%f %f)", wpID.c_str(), goal_pose_.pose.position.x, goal_pose_.pose.position.y);
   move_base_msgs::MoveBaseGoal goal;
@@ -114,12 +99,6 @@ void RP_move::activateCode()
 void RP_move::deActivateCode()
 {
   action_client_.cancelAllGoals();
-}
-
-void RP_move::attentionOn()
-{
-  engage_msg_.request.mode = "off";
-  engage_srv.call(engage_msg_);
 }
 
 void RP_move::step()

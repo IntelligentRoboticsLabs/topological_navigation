@@ -51,9 +51,6 @@
 
 #include <bica_planning/Action.h>
 #include <topological_navigation_msgs/GetLocation.h>
-#include <pepper_basic_capabilities_msgs/EngageMode.h>
-#include <pepper_basic_capabilities_msgs/ShowWeb.h>
-#include <pepper_basic_capabilities_msgs/DoTalk.h>
 
 #ifndef KCL_cross
 #define KCL_cross
@@ -73,8 +70,6 @@ private:
 
   void timerCallback(const ros::TimerEvent&);
   void sonarCallback(const sensor_msgs::Range::ConstPtr& sonar_in);
-  void attentionOn();
-  void talk(std::string s);
 
   ros::Timer timer;
   enum StateType
@@ -87,12 +82,11 @@ private:
   std::string actionserver_;
   geometry_msgs::PoseStamped goal_pose_;
   actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> action_client_;
-  ros::ServiceClient srv_goal_, clear_cmap_srv, engage_srv, web_srv, message_srv;
+  ros::ServiceClient srv_goal_, clear_cmap_srv;
   ros::Publisher message_pub;
   ros::Subscriber sonar_sub;
   move_base_msgs::MoveBaseGoal goal;
   bool goal_sended, door_msg_sended, sonar_activate;
-  pepper_basic_capabilities_msgs::EngageMode engage_msg_;
 };
 
 #endif

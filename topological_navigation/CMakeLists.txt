@@ -19,7 +19,6 @@ find_package(catkin REQUIRED COMPONENTS
   costmap_2d
   image_transport
   roslint
-  pepper_basic_capabilities_msgs
   topological_navigation_msgs
 )
 

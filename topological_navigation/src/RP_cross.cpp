@@ -46,20 +46,12 @@ RP_cross::RP_cross(ros::NodeHandle& nh) : nh_(nh), Action("cross"), action_clien
 {
   srv_goal_ = nh_.serviceClient<topological_navigation_msgs::GetLocation>("/topological_navigation/get_location");
   clear_cmap_srv = nh_.serviceClient<std_srvs::Empty>("/move_base/clear_costmaps");
-  //message_pub = nh_.advertise<std_msgs::String>("/pepper_basic_capabilities/speech", 1);
-  message_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::DoTalk>("/pepper_basic_capabilities/talk", 1);
+  message_pub = nh_.advertise<std_msgs::String>("/speech", 1);
   sonar_sub = nh_.subscribe("/pepper_robot/sonar/front", 1, &RP_cross::sonarCallback, this);
-  engage_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::EngageMode>("/pepper_basic_capabilities/engage_mode");
-  web_srv = nh_.serviceClient<pepper_basic_capabilities_msgs::ShowWeb>("/pepper_basic_capabilities/show_tablet_web");
 }
 
 void RP_cross::activateCode()
 {
-  /* HRI tablet */
-  pepper_basic_capabilities_msgs::ShowWeb w_srv;
-  w_srv.request.url = "common/navigating.html";
-  web_srv.call(w_srv);
-
   while (!action_client_.waitForServer(ros::Duration(5.0)))
   {
     ROS_INFO("[cross] Waiting for the move_base action server to come up");
@@ -101,28 +93,11 @@ void RP_cross::activateCode()
   ROS_INFO("[cross]Commanding to [%s] (%f %f)", wpID.c_str(), goal_pose_.pose.position.x, goal_pose_.pose.position.y);
   goal.target_pose = goal_pose_;
   goal.target_pose.header.frame_id = "/map";  // Quizás esto debería ir en el map y lerobocupo del yaml
-
-  attentionOn();
-}
-
-void RP_cross::talk(std::string s)
-{
-  //editWebTag("*say*", s);
-
-  pepper_basic_capabilities_msgs::DoTalk srv;
-  srv.request.sentence = s;
-  message_srv.call(srv);
 }
 
 void RP_cross::deActivateCode()
 {
   action_client_.cancelAllGoals();
-}
-
-void RP_cross::attentionOn()
-{
-  engage_msg_.request.mode = "off";
-  engage_srv.call(engage_msg_);
 }
 
 void RP_cross::step()
@@ -135,8 +110,7 @@ void RP_cross::step()
       {
         speech_msg.data = "Crossing the door";
         // speech_msg.data = "Cruzando la puerta";
-        //message_pub.publish(speech_msg);
-        talk("Crossing the door");
+        message_pub.publish(speech_msg);
         goal.target_pose.header.stamp = ros::Time::now();
         std_srvs::Empty srv;
         if (!clear_cmap_srv.call(srv))
@@ -170,8 +144,7 @@ void RP_cross::step()
       {
         speech_msg.data = "Hi, Could you open the door, please?";
         // speech_msg.data = "Hola, ¿Podrias abrirme la puerta, por favor?";
-        //message_pub.publish(speech_msg);
-        talk("Hi, Could you open the door, please?");
+        message_pub.publish(speech_msg);
         door_msg_sended = true;
       }
       break;

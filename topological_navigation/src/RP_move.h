@@ -49,9 +49,6 @@
 #include "std_srvs/Empty.h"
 #include <bica_planning/Action.h>
 #include <topological_navigation_msgs/GetLocation.h>
-#include <pepper_basic_capabilities_msgs/DoTalk.h>
-#include <pepper_basic_capabilities_msgs/EngageMode.h>
-#include <pepper_basic_capabilities_msgs/ShowWeb.h>
 
 #ifndef KCL_move
 #define KCL_move
@@ -72,11 +69,7 @@ private:
   std::string actionserver_;
   geometry_msgs::PoseStamped goal_pose_;
   actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> action_client_;
-  ros::ServiceClient srv_goal_, message_srv, engage_srv, web_srv;
-  pepper_basic_capabilities_msgs::EngageMode engage_msg_;
-
-  void talk(std::string s);
-  void attentionOn();
+  ros::ServiceClient srv_goal_;
 };
 
 #endif
