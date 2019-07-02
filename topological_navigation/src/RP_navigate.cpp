@@ -82,7 +82,10 @@ void RP_navigate::activateCode()
   }
 
   goal_pose_.pose = *(results[0]);
-  ROS_INFO("[navigate]Commanding to [%s] (%f %f)", wpID.c_str(), goal_pose_.pose.position.x, goal_pose_.pose.position.y);
+  ROS_INFO("[navigate]Commanding to [%s] (%f %f)",
+    wpID.c_str(),
+    goal_pose_.pose.position.x,
+    goal_pose_.pose.position.y);
 
   move_base_msgs::MoveBaseGoal goal;
   goal.target_pose = goal_pose_;

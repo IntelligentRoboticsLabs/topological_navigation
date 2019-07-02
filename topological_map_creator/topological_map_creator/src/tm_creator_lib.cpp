@@ -40,6 +40,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 namespace tm_creator_lib
 {
@@ -61,18 +62,18 @@ void TMCreatorLib::addWpCB(const AddWp::ConstPtr& msg)
 {
   geometry_msgs::Pose p;
   tf2::Quaternion quat;
-  quat.setEuler(0.0,0.0,0.0);
+  quat.setEuler(0.0, 0.0, 0.0);
   p.position.x = 0.0;
   p.position.y = 0.0;
   p.orientation = tf2::toMsg(quat);
-  addWp(msg->wp_name, msg->room,p);
+  addWp(msg->wp_name, msg->room, p);
 }
 
 void TMCreatorLib::addDoorCB(const AddDoor::ConstPtr& door)
 {
   geometry_msgs::Pose p;
   tf2::Quaternion quat;
-  quat.setEuler(0.0,0.0,0.0);
+  quat.setEuler(0.0, 0.0, 0.0);
   p.position.x = 0.0;
   p.position.y = 0.0;
   p.orientation = tf2::toMsg(quat);
@@ -612,11 +613,11 @@ void TMCreatorLib::addDoor(AddDoor door_msg, geometry_msgs::Pose p)
     door.way_1.wp_1,
     door_msg.room_1,
     "room == " + door_msg.room_1,
-    tf::Vector3(p.position.x, p.position.y, 0),quat.getAngle());
+    tf::Vector3(p.position.x, p.position.y, 0), quat.getAngle());
   int_marker_2 = makeWp(
     door.way_1.wp_2, door_msg.room_2,
     "room == " + door_msg.room_2,
-    tf::Vector3(p.position.x + DOOR_GAP, p.position.y, 0),quat.getAngle());
+    tf::Vector3(p.position.x + DOOR_GAP, p.position.y, 0), quat.getAngle());
   int_marker_3 = makeWp(
     door.way_2.wp_1,
     door_msg.room_2,
@@ -685,14 +686,14 @@ void TMCreatorLib::prepareVector(std::vector<std::string> &vector)
 void TMCreatorLib::printConnectionPairs(
   YAML::Emitter& out,
   std::string key,
-  std::map<std::string,std::vector<std::string>> map)
+  std::map<std::string, std::vector<std::string>> map)
 {
   out << YAML::BeginMap;
   out << YAML::Key << key;
   out << YAML::Value;
   out << YAML::BeginMap;
-  for (std::map<std::string,std::vector<std::string>>::iterator it=map.begin();
-    it!=map.end();
+  for (std::map<std::string, std::vector<std::string>>::iterator it = map.begin();
+    it != map.end();
     ++it)
   {
     out << YAML::Key << it->first;
@@ -704,7 +705,6 @@ void TMCreatorLib::printConnectionPairs(
 
 bool TMCreatorLib::saveMap(std::string path)
 {
-
   YAML::Emitter out, out_wp, out_conn, out_doors;
   std::ofstream file(path + "/.topological_map.yaml");
   std::vector<std::string> wp_ids, door_ids, room_ids, connections_ids;
@@ -730,7 +730,7 @@ bool TMCreatorLib::saveMap(std::string path)
         rooms.push_back(c_marker.room);
         links.push_back(it->marker.name);
         links.push_back(*it_conn);
-        std::map<std::string,std::vector<std::string>> conn_map;
+        std::map<std::string, std::vector<std::string>> conn_map;
         conn_map["rooms"] = rooms;
         conn_map["visual_link"] = links;
         printConnectionPairs(out_conn, it->room + "_to_" + c_marker.room, conn_map);
@@ -744,7 +744,7 @@ bool TMCreatorLib::saveMap(std::string path)
     door_ids.push_back(it->way_2.id);
 
     std::vector<std::string> waypoints_1, waypoints_2;
-    std::map<std::string,std::vector<std::string>> wp_map_1, wp_map_2;
+    std::map<std::string, std::vector<std::string>> wp_map_1, wp_map_2;
 
     waypoints_1.push_back(it->way_1.id + "_1");
     waypoints_1.push_back(it->way_1.id + "_2");
@@ -782,7 +782,7 @@ bool TMCreatorLib::saveMap(std::string path)
   std::ofstream file_out(path + "/topological_map.yaml");
 
   std::string str;
-  while(getline(file_in,str))
+  while (getline(file_in, str))
   {
     if (str != "---")
     {
@@ -795,17 +795,6 @@ bool TMCreatorLib::saveMap(std::string path)
   file_out.close();
   return true;
 }
-
-/*void operator >> (const YAML::Node& node, ValuesTable::TemporalInfo& info) {
-  for (YAML::const_iterator it = node.begin(); it != node.end(); ++it)
-  {
-    YAML::Node values;
-    values = it->second;
-    for (int i=0; i< values.size();i++)
-      info[it->first.as<int>()].push_back(values[i].as<float>());
-  }
-}
-*/
 
 std::vector<std::string> TMCreatorLib::spliter(std::string str, std::string delimiter)
 {
@@ -828,7 +817,7 @@ geometry_msgs::Pose TMCreatorLib::posStrToMsg(std::string str)
   p.position.x = std::atof(v[0].c_str());
   p.position.y = std::atof(v[1].c_str());
   tf2::Quaternion quat;
-  quat.setEuler(std::atof(v[2].c_str()),0.0,0.0);
+  quat.setEuler(std::atof(v[2].c_str()), 0.0, 0.0);
   p.orientation = tf2::toMsg(quat);
   return p;
 }
@@ -842,79 +831,80 @@ void TMCreatorLib::loadMap(std::string path)
   YAML::Parser parser(fin);
   YAML::Node root;
   std::vector<std::string> wp_ids, door_ids, rooms, connections;
-   try {
-       root = YAML::LoadFile(path);
-   } catch (const std::exception& e){
-       std::cout << e.what() << "\n";
-       return;
-   }
-   for (YAML::const_iterator it = root.begin(); it != root.end(); ++it)
-   {
-     if(it->first.as<std::string>() == "waypoints_ids")
-     {
-       for (int i = 0; i < it->second.size(); i++)
-         wp_ids.push_back(it->second[i].as<std::string>());
-     }
-     else if (it->first.as<std::string>() == "door_ids")
-     {
-       for (int i = 0; i < it->second.size(); i++)
-         door_ids.push_back(it->second[i].as<std::string>());
-     }
-     else if (it->first.as<std::string>() == "connections")
-     {
-       for (int i = 0; i < it->second.size(); i++)
-         connections.push_back(it->second[i].as<std::string>());
-     }
-   }
-
-   for (YAML::const_iterator it = root.begin(); it != root.end(); ++it)
-   {
-     if(std::find(wp_ids.begin(), wp_ids.end(), it->first.as<std::string>()) != wp_ids.end())
-     {
-       from = it->first.as<std::string>();
-       if (std::find(door_ids.begin(), door_ids.end(), from.substr(0, from.length()-2)) == door_ids.end())
-       {
-         room = it->second["room"].as<std::string>();
-         addWp(from,room,posStrToMsg(it->second["position"].as<std::string>()));
-       }
-       else
-       {
-         //ROS_INFO("%s %s", from.c_str(), it->second["position"].as<std::string>().c_str());
-         from = from.substr(0, from.length()-2);
-         std::vector<std::string> r = spliter(from, "_to_");
-         //ROS_INFO("%s %s", r[0].c_str(), r[1].c_str());
-         if (rooms.size() == 0)
-         {
-           rooms.insert(rooms.end(),r.begin(),r.end());
-           AddDoor msg;
-           msg.room_1 = r[0];
-           msg.room_2 = r[1];
-           addDoor(msg, posStrToMsg(it->second["position"].as<std::string>()));
-         }
-         else if (std::find(rooms.begin(), rooms.end(), r[0]) == rooms.end())
-         {
-           rooms.insert(rooms.end(),r.begin(),r.end());
-           AddDoor msg;
-           msg.room_1 = r[0];
-           msg.room_2 = r[1];
-           addDoor(msg, posStrToMsg(it->second["position"].as<std::string>()));
-         }
-       }
-     }else if(std::find(
-       connections.begin(),
-       connections.end(),
-       it->first.as<std::string>()) != connections.end())
-     {
-       YAML::Node link_node = root[it->first.as<std::string>()];
-       for (YAML::const_iterator it_links=link_node.begin();it_links != link_node.end();++it_links)
-         if (it_links->first.as<std::string>() == "visual_link")
-         {
-           std::vector<std::string> wps = it_links->second.as<std::vector<std::string>>();
-           createLink(wps[0], wps[1]);
-           createVisualLink(wps[0], wps[1]);
-         }
-     }
-   }
+  try
+  {
+    root = YAML::LoadFile(path);
+  }
+  catch (const std::exception& e)
+  {
+    std::cout << e.what() << "\n";
+    return;
+  }
+  for (YAML::const_iterator it = root.begin(); it != root.end(); ++it)
+  {
+    if (it->first.as<std::string>() == "waypoints_ids")
+    {
+      for (int i = 0; i < it->second.size(); i++)
+        wp_ids.push_back(it->second[i].as<std::string>());
+    }
+    else if (it->first.as<std::string>() == "door_ids")
+    {
+     for (int i = 0; i < it->second.size(); i++)
+       door_ids.push_back(it->second[i].as<std::string>());
+    }
+    else if (it->first.as<std::string>() == "connections")
+    {
+     for (int i = 0; i < it->second.size(); i++)
+       connections.push_back(it->second[i].as<std::string>());
+    }
+  }
+  for (YAML::const_iterator it = root.begin(); it != root.end(); ++it)
+  {
+    if (std::find(wp_ids.begin(), wp_ids.end(), it->first.as<std::string>()) != wp_ids.end())
+    {
+      from = it->first.as<std::string>();
+      if (std::find(door_ids.begin(), door_ids.end(), from.substr(0, from.length()-2)) == door_ids.end())
+      {
+        room = it->second["room"].as<std::string>();
+        addWp(from, room, posStrToMsg(it->second["position"].as<std::string>()));
+      }
+      else
+      {
+        from = from.substr(0, from.length()-2);
+        std::vector<std::string> r = spliter(from, "_to_");
+        if (rooms.size() == 0)
+        {
+          rooms.insert(rooms.end(), r.begin(), r.end());
+          AddDoor msg;
+          msg.room_1 = r[0];
+          msg.room_2 = r[1];
+          addDoor(msg, posStrToMsg(it->second["position"].as<std::string>()));
+        }
+        else if (std::find(rooms.begin(), rooms.end(), r[0]) == rooms.end())
+        {
+          rooms.insert(rooms.end(), r.begin(), r.end());
+          AddDoor msg;
+          msg.room_1 = r[0];
+          msg.room_2 = r[1];
+          addDoor(msg, posStrToMsg(it->second["position"].as<std::string>()));
+        }
+      }
+    }
+    else if (std::find(
+      connections.begin(),
+      connections.end(),
+      it->first.as<std::string>()) != connections.end())
+    {
+      YAML::Node link_node = root[it->first.as<std::string>()];
+      for (YAML::const_iterator it_links=link_node.begin(); it_links != link_node.end(); ++it_links)
+        if (it_links->first.as<std::string>() == "visual_link")
+        {
+          std::vector<std::string> wps = it_links->second.as<std::vector<std::string>>();
+          createLink(wps[0], wps[1]);
+          createVisualLink(wps[0], wps[1]);
+        }
+      }
+    }
 }
 
 }  //  namespace tm_creator_lib

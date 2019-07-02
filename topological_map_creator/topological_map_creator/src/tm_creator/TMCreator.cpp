@@ -91,7 +91,11 @@ void TMCreator::rm()
 
 void TMCreator::save()
 {
-  QString dir_name = QFileDialog::getExistingDirectory(widget_, tr("Select dir"),"/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+  QString dir_name = QFileDialog::getExistingDirectory(
+    widget_,
+    tr("Select dir"),
+    "/home",
+    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
   SaveMap srv;
   srv.request.path = dir_name.toUtf8().constData();;
   if (save_client_.call(srv))
@@ -105,7 +109,12 @@ void TMCreator::save()
 void TMCreator::load()
 {
   QString selfilter = tr("YAML (*.yaml)");
-  QString file_name = QFileDialog::getOpenFileName(widget_, tr("Select topological_map"),"/home",tr("YAML (*.yaml)"), &selfilter);
+  QString file_name = QFileDialog::getOpenFileName(
+    widget_,
+    tr("Select topological_map"),
+    "/home",
+    tr("YAML (*.yaml)"),
+    &selfilter);
   SaveMap srv;
   srv.request.path = file_name.toUtf8().constData();;
   if (load_client_.call(srv))
