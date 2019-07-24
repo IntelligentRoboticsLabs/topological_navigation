@@ -70,6 +70,5 @@ private:
   geometry_msgs::PoseStamped goal_pose_;
   actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> action_client_;
   ros::ServiceClient srv_goal_;
-
 };
 #endif

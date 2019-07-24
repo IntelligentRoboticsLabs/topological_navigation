@@ -47,6 +47,7 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <math.h>
+#include <map>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -156,8 +157,6 @@ private:
   void loadMap(std::string path);
   std::vector<std::string> spliter(std::string str, std::string delimiter);
   geometry_msgs::Pose posStrToMsg(std::string str);
-
-
 };
 }  //  namespace tm_creator_lib
 #endif  // TMCREATORLIB_H

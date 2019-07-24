@@ -51,11 +51,6 @@ RP_move::RP_move(ros::NodeHandle& nh) : nh_(nh), Action("move_to"), action_clien
 
 void RP_move::activateCode()
 {
-  /* HRI tablet */
-  //pepper_basic_capabilities_msgs::ShowWeb w_srv;
-  //w_srv.request.url = "common/navigating.html";
-  //web_srv.call(w_srv);
-
   while (!action_client_.waitForServer(ros::Duration(5.0)))
   {
     ROS_INFO("[move_to] Waiting for the move_base action server to come up");
@@ -88,7 +83,10 @@ void RP_move::activateCode()
 
   goal_pose_.pose = *(results[0]);
 
-  ROS_INFO("[move_to]Commanding to [%s] (%f %f)", wpID.c_str(), goal_pose_.pose.position.x, goal_pose_.pose.position.y);
+  ROS_INFO("[move_to]Commanding to [%s] (%f %f)",
+    wpID.c_str(),
+    goal_pose_.pose.position.x,
+    goal_pose_.pose.position.y);
   move_base_msgs::MoveBaseGoal goal;
   goal.target_pose = goal_pose_;
   goal.target_pose.header.frame_id = "/map";
