@@ -2,7 +2,7 @@
   <arg name="topological_map" />
   <arg name="map"/>
   <arg name="robot"/>
-  <arg name="scan_topic"/>
+  <arg name="scan_topic" default="scan"/>
   <arg name="initial_pose_x" default="0.0"/>
   <arg name="initial_pose_y" default="0.0"/>
   <arg name="initial_pose_a" default="0.0"/>
@@ -57,6 +57,16 @@
     </include>
   </group>
 
+  <group if="$(eval robot == 'rb1')" >
+    <include file="$(find gb_navigation)/launch/navigation.launch">
+      <arg name="scan_topic" value="$(arg scan_topic)"/>
+      <arg name="map_file" value="$(arg map)"/>
+      <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+      <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+      <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+    </include>
+  </group>
+
   <group if="$(eval robot == 'pepper')" >
     <include file="$(find pepper_navigation_bringup)/launch/navigation.launch">
       <arg name="map_file" value="$(arg map)"/>
@@ -65,4 +75,7 @@
       <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
     </include>
   </group>
+
+  <group if="$(eval robot == 'tiago')" />
+
 </launch>
