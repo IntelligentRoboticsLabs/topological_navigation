@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   interactive_markers
   roslint
   topological_map_creator_msgs
+  tf2_geometry_msgs
 )
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(YAMLCPP yaml-cpp REQUIRED)
