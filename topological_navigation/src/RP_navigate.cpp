@@ -89,7 +89,7 @@ void RP_navigate::activateCode()
 
   move_base_msgs::MoveBaseGoal goal;
   goal.target_pose = goal_pose_;
-  goal.target_pose.header.frame_id = "/map";
+  goal.target_pose.header.frame_id = map;
   goal.target_pose.header.stamp = ros::Time::now();
   action_client_.sendGoal(goal);
 }
