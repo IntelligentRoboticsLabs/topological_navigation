@@ -38,6 +38,8 @@
 
 #include <ros/ros.h>
 #include <bica_planning/KMSClient.h>
+#include <bica_graph/graph_client.h>
+
 #include <geometry_msgs/Pose.h>
 #include <topological_navigation_msgs/GetLocation.h>
 #include <topological_navigation_msgs/SetLocation.h>
@@ -70,6 +72,7 @@ private:
   void start_location();
 
   ros::NodeHandle nh_;
+  bica_graph::GraphClient graph_;
 
   std::map<std::string, std::string> waypoints_rooms_;
   std::map<std::string, geometry_msgs::Pose> waypoints_pos_;

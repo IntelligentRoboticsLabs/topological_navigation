@@ -7,6 +7,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   bica_planning
+  bica_graph
   tf
   geometry_msgs
   nav_msgs
