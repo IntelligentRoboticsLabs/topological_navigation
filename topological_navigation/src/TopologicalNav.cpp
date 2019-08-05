@@ -38,6 +38,8 @@
 
 #include "topological_navigation/TopologicalNav.h"
 
+#include <tf/transform_datatypes.h>
+
 #include <string>
 #include <vector>
 
@@ -128,12 +130,18 @@ void TopologicalNav::start_location()
     nh_.getParam(ros::this_node::getName() + "/connections", connections);
 
   for (int i = 0; i < rooms.size(); i++)
+  {
     add_instance("room", rooms[i]);
+    graph_.add_node(rooms[i], "room");
+  }
+
   for (int i = 0; i < doors.size(); i++)
     add_instance("door", doors[i]);
+
   for (int i = 0; i < waypoints.size(); i++)
   {
     add_instance("waypoint", waypoints[i]);
+    graph_.add_node(waypoints[i], "waypoint");
   }
 
   for (int i = 0; i < waypoints.size(); i++)
@@ -149,6 +157,12 @@ void TopologicalNav::start_location()
       waypoints_pos_[waypoints[i]] = stringToPose(coords);
 
       add_predicate("waypoint_at " + waypoints[i] + " " + room);
+      graph_.add_edge(room, "waypoint_at", waypoints[i]);
+
+      tf::Transform room2wp;
+      tf::poseMsgToTF (waypoints_pos_[waypoints[i]], room2wp);
+
+      graph_.add_edge(room, room2wp, waypoints[i], true);
     }
   }
 
