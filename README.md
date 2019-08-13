@@ -1,6 +1,7 @@
 # Topological Navigation
 
-[![pipeline status](https://gitlab.com/fmrico/topological_navigation/badges/develop/pipeline.svg)](https://gitlab.com/fmrico/topological_navigation/commits/develop)
+[![Build Status](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation.svg?branch=melodic)](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation)
+
 
 ## Packages
 
