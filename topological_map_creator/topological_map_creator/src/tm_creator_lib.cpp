@@ -37,6 +37,12 @@
 /* Mantainer: Jonatan Gines jgines@gsyc.urjc.es */
 
 #include "topological_map_creator/tm_creator_lib.h"
+
+#include <tf2/utils.h>
+#include <tf2/transform_datatypes.h>
+#include <tf2_sensor_msgs/tf2_sensor_msgs.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -140,7 +146,7 @@ void TMCreatorLib::doorFeedback(
   updatePos(feedback->marker_name, feedback->pose);
   updateDes(int_marker_1);
   Door door_1 = getDoor(feedback->marker_name);
-  float angle = tf::getYaw(feedback->pose.orientation);
+  float angle = tf2::getYaw(feedback->pose.orientation);
   if (feedback->marker_name == door_1.way_1.wp_2)
     angle = angle + M_PI;
   float x_wp, y_wp, x_door, y_door;
@@ -153,14 +159,14 @@ void TMCreatorLib::doorFeedback(
   Door door = getDoor(feedback->marker_name);
   server->get(door.way_1.id + "_line", int_marker_3);
 
-    tf::pointTFToMsg(
-    tf::Vector3(
+    tf2::toMsg(
+    tf2::Vector3(
       feedback->pose.position.x + x_wp,
       feedback->pose.position.y + y_wp,
       0),
     int_marker_2.pose.position);
-  tf::pointTFToMsg(
-    tf::Vector3(
+  tf2::toMsg(
+    tf2::Vector3(
       feedback->pose.position.x + x_door,
       feedback->pose.position.y + y_door,
       0),
@@ -351,9 +357,10 @@ void TMCreatorLib::connectWps(std::string from, std::string to)
 geometry_msgs::Pose TMCreatorLib::invertPose(geometry_msgs::Pose p_in)
 {
   geometry_msgs::Pose p_out = p_in;
-  tf::quaternionTFToMsg(
-    tf::createQuaternionFromYaw(tf::getYaw(p_in.orientation) - M_PI).normalize(),
-    p_out.orientation);
+  tf2::Quaternion q;
+
+  q.setRPY(0, 0, tf2::getYaw(p_in.orientation) - M_PI);
+  p_out.orientation = tf2::toMsg(q.normalize());
   return p_out;
 }
 
@@ -548,7 +555,7 @@ void TMCreatorLib::addWp(std::string wp_name, std::string room, geometry_msgs::P
     wp_name,
     room,
     "",
-    tf::Vector3(p.position.x, p.position.y, 0), quat.getAngle());
+    tf2::Vector3(p.position.x, p.position.y, 0), quat.getAngle());
 
   InteractiveMarkerControl control;
   control = int_marker.controls[0];
@@ -567,13 +574,17 @@ InteractiveMarker TMCreatorLib::makeWp(
   std::string wp_name,
   std::string room,
   std::string description,
-  tf::Vector3 position,
+  tf2::Vector3 position,
   double yaw)
 {
   InteractiveMarker int_marker;
   int_marker.header.frame_id = "map";
-  tf::pointTFToMsg(position, int_marker.pose.position);
-  tf::quaternionTFToMsg(tf::createQuaternionFromYaw(yaw).normalize(), int_marker.pose.orientation);
+  tf2::toMsg(position, int_marker.pose.position);
+
+  tf2::Quaternion q;
+  q.setRPY(0, 0, yaw);
+
+  int_marker.pose.orientation = tf2::toMsg(q.normalize());
   int_marker.name = wp_name;
   int_marker.scale = 1;
   if (description != "")
@@ -582,8 +593,8 @@ InteractiveMarker TMCreatorLib::makeWp(
     int_marker.description = wp_name + "\n" + room +"\n ( 0.0, 0.0, 0.0 )";
 
   InteractiveMarkerControl control;
-  tf::Quaternion orientation(0.0, 1.0, 0.0, 1.0);
-  tf::quaternionTFToMsg(orientation.normalize(), control.orientation);
+  tf2::Quaternion orientation(0.0, 1.0, 0.0, 1.0);
+  control.orientation = tf2::toMsg(orientation.normalize());
   control.interaction_mode = InteractiveMarkerControl::MOVE_PLANE;
   int_marker.controls.push_back(control);
   control.interaction_mode = InteractiveMarkerControl::MOVE_ROTATE;
@@ -613,35 +624,35 @@ void TMCreatorLib::addDoor(AddDoor door_msg, geometry_msgs::Pose p)
     door.way_1.wp_1,
     door_msg.room_1,
     "room == " + door_msg.room_1,
-    tf::Vector3(p.position.x, p.position.y, 0), quat.getAngle());
+    tf2::Vector3(p.position.x, p.position.y, 0), quat.getAngle());
   int_marker_2 = makeWp(
     door.way_1.wp_2, door_msg.room_2,
     "room == " + door_msg.room_2,
-    tf::Vector3(p.position.x + DOOR_GAP, p.position.y, 0), quat.getAngle());
+    tf2::Vector3(p.position.x + DOOR_GAP, p.position.y, 0), quat.getAngle());
   int_marker_3 = makeWp(
     door.way_2.wp_1,
     door_msg.room_2,
     "",
-    tf::Vector3(p.position.x + DOOR_GAP, p.position.y, 0), quat.getAngle() + M_PI);
+    tf2::Vector3(p.position.x + DOOR_GAP, p.position.y, 0), quat.getAngle() + M_PI);
   int_marker_4 = makeWp(
     door.way_2.wp_2,
     door_msg.room_1,
     "",
-    tf::Vector3(p.position.x, p.position.y, 0), quat.getAngle() + M_PI);
+    tf2::Vector3(p.position.x, p.position.y, 0), quat.getAngle() + M_PI);
   server->insert(int_marker_1);
   server->insert(int_marker_2);
 
   line_marker.header.frame_id = "map";
-  tf::Vector3 position;
-  position = tf::Vector3(p.position.x + DOOR_GAP/2, p.position.y, 0);
-  tf::pointTFToMsg(position, line_marker.pose.position);
+  tf2::Vector3 position;
+  position = tf2::Vector3(p.position.x + DOOR_GAP/2, p.position.y, 0);
+  tf2::toMsg(position, line_marker.pose.position);
   line_marker.name = door.way_1.id + "_line";
   line_marker.scale = 1;
 
   InteractiveMarkerControl control;
-  tf::Quaternion orien(0.0, 1.0, 0.0, 1.0);
+  tf2::Quaternion orien(0.0, 1.0, 0.0, 1.0);
   orien.normalize();
-  tf::quaternionTFToMsg(orien, control.orientation);
+  control.orientation = tf2::toMsg(orien);
 
   Marker line = makeDoorLine(line_marker);
   control.markers.push_back(line);
@@ -671,7 +682,7 @@ YAML::Emitter& operator << (YAML::Emitter& out, const tm_creator_lib::TMCreatorL
   out << YAML::Value <<
     to_string(c.marker.pose.position.x) + ", " +
     to_string(c.marker.pose.position.y) + ", " +
-    to_string(tf::getYaw(c.marker.pose.orientation));
+    to_string(tf2::getYaw(c.marker.pose.orientation));
   out << YAML::EndMap;
   out << YAML::EndMap;
   return out;

@@ -164,4 +164,4 @@ void TMCreator::shutdownPlugin()
 }
 
 }  //  namespace tm_creator
-PLUGINLIB_DECLARE_CLASS(tm_creator, TMCreator, tm_creator::TMCreator, rqt_gui_cpp::Plugin)
+PLUGINLIB_EXPORT_CLASS(tm_creator::TMCreator, rqt_gui_cpp::Plugin)

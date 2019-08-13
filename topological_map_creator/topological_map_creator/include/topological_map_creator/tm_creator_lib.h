@@ -149,7 +149,7 @@ private:
     std::string wp_name,
     std::string room,
     std::string description,
-    tf::Vector3 position,
+    tf2::Vector3 position,
     double yaw);
   void prepareVector(std::vector<std::string> &vector);
   void printConnectionPairs(YAML::Emitter& out, std::string key, std::map<std::string, std::vector<std::string>> map);
