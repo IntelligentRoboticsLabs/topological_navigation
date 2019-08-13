@@ -55,7 +55,7 @@ TEST(TESTSuite, test_api_locations)
   EXPECT_FALSE(map.get_location("wp1", aux1));
 
   geometry_msgs::Pose aux2;
-  aux2.orientation = tf::createQuaternionMsgFromYaw(2.0);
+  aux2.orientation = tf2::createQuaternionMsgFromYaw(2.0);
   aux2.position.x = 1.0;
 
   geometry_msgs::Pose aux3;
@@ -151,7 +151,7 @@ TEST(TESTSuite, test_services)
   EXPECT_TRUE(ros::service::waitForService("/topological_navigation/get_location", ros::Duration(2)));
 
   geometry_msgs::Pose pose;
-  pose.orientation = tf::createQuaternionMsgFromYaw(2.0);
+  pose.orientation = tf2::createQuaternionMsgFromYaw(2.0);
   pose.position.x = 1.0;
 
   topological_navigation_msgs::SetLocation srv_set;

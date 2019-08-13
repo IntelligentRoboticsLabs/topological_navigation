@@ -8,7 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   bica_planning
   bica_graph
-  tf
   geometry_msgs
   nav_msgs
   visualization_msgs
@@ -21,6 +20,11 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   roslint
   topological_navigation_msgs
+  tf2
+  tf2_ros
+  tf2_msgs
+  tf2_sensor_msgs
+  tf2_geometry_msgs
 )
 
 

@@ -19,36 +19,43 @@
   <build_depend>rospy</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend>
-  <build_depend>tf</build_depend>
   <build_depend>rqt_gui</build_depend>
   <build_depend>rqt_gui_cpp</build_depend>
   <build_depend>interactive_markers</build_depend>
   <build_depend>roslint</build_depend>
   <build_depend>yaml-cpp</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>tf2_msgs</build_depend>
+  <build_depend>tf2_sensor_msgs</build_depend>
   <build_depend>tf2_geometry_msgs</build_depend>
 
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
-  <build_export_depend>tf</build_export_depend>
   <build_export_depend>rqt_gui</build_export_depend>
   <build_export_depend>rqt_gui_cpp</build_export_depend>
   <build_export_depend>interactive_markers</build_export_depend>
   <build_export_depend>yaml-cpp</build_export_depend>
+  <build_export_depend>tf2</build_export_depend>
+  <build_export_depend>tf2_ros</build_export_depend>
+  <build_export_depend>tf2_msgs</build_export_depend>
+  <build_export_depend>tf2_sensor_msgs</build_export_depend>
   <build_export_depend>tf2_geometry_msgs</build_export_depend>
 
   <exec_depend>rospy</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-  <exec_depend>tf</exec_depend>
   <exec_depend>rqt_gui</exec_depend>
   <exec_depend>rqt_gui_cpp</exec_depend>
   <exec_depend>interactive_markers</exec_depend>
   <exec_depend>yaml-cpp</exec_depend>
-  <exec_depend>tf2_geometry_msgs</exec_depend>
-
-
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>tf2_msgs</exec_depend>
+  <exec_depend>tf2_sensor_msgs</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>   
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

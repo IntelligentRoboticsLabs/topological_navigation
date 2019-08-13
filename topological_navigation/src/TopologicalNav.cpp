@@ -38,7 +38,10 @@
 
 #include "topological_navigation/TopologicalNav.h"
 
-#include <tf/transform_datatypes.h>
+#include <tf2/utils.h>
+#include <tf2/transform_datatypes.h>
+#include <tf2_sensor_msgs/tf2_sensor_msgs.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 #include <string>
 #include <vector>
@@ -102,7 +105,7 @@ geometry_msgs::Pose TopologicalNav::stringToPose(const std::string& coords)
   pose.position.y = ly;
   pose.position.z = 0;
 
-  tf::Quaternion q;
+  tf2::Quaternion q;
   q.setEuler(0, 0, lz);
 
   pose.orientation.x = q.x();
@@ -159,8 +162,8 @@ void TopologicalNav::start_location()
       add_predicate("waypoint_at " + waypoints[i] + " " + room);
       graph_.add_edge(room, "waypoint_at", waypoints[i]);
 
-      tf::Transform room2wp;
-      tf::poseMsgToTF (waypoints_pos_[waypoints[i]], room2wp);
+      tf2::Transform room2wp;
+      tf2::fromMsg(waypoints_pos_[waypoints[i]], room2wp);
 
       graph_.add_edge(room, room2wp, waypoints[i], true);
     }

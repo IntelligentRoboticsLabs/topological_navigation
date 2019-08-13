@@ -7,12 +7,15 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   roscpp
   std_msgs
-  tf
   rqt_gui
   rqt_gui_cpp
   interactive_markers
   roslint
   topological_map_creator_msgs
+  tf2
+  tf2_ros
+  tf2_msgs
+  tf2_sensor_msgs
   tf2_geometry_msgs
 )
 find_package(PkgConfig REQUIRED)
