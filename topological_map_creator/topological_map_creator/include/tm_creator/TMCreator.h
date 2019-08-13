@@ -48,7 +48,7 @@
 #include <QString>
 #include <QFileDialog>
 #include "ros/ros.h"
-#include <pluginlib/class_list_macros.hpp>
+#include <pluginlib/class_list_macros.h>
 #include <QStringList>
 #include <std_msgs/String.h>
 #include <std_msgs/Empty.h>

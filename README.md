@@ -1,6 +1,6 @@
 # Topological Navigation
 
-[![Build Status](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation.svg?branch=melodic)](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation)
+[![Build Status](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation.svg?branch=master)](https://travis-ci.com/IntelligentRoboticsLabs/topological_navigation)
 
 
 ## Packages
