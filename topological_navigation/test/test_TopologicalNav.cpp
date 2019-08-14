@@ -55,7 +55,7 @@ TEST(TESTSuite, test_api_locations)
   EXPECT_FALSE(map.get_location("wp1", aux1));
 
   geometry_msgs::Pose aux2;
-  aux2.orientation = tf2::createQuaternionMsgFromYaw(2.0);
+  aux2.orientation = tf2::toMsg(tf2::Quaternion(0.2, 0, 0));
   aux2.position.x = 1.0;
 
   geometry_msgs::Pose aux3;
@@ -205,7 +205,7 @@ public:
   TestKMS()
   {
   }
-  std::vector<std::string> test_get_predicates(std::regex re)
+  std::vector<std::string> test_get_predicates(std::string re)
   {
     return search_predicates_regex(re);
   }

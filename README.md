@@ -13,7 +13,7 @@
 - **Maintainer:** Francisco Martín <fmrico@gmail.com>
 - **Author:** Francisco Martín <fmrico@gmail.com>
 - **License:** BSD
-- **ROS Distro:** Kinetic
+- **ROS Distro:** Melodic
 - **Dependencies:**
   - **ROS Standard:** roscpp, rospy, tf, geometry_msgs, std_msgs, sensor_msgs, nav_msgs, visualization_msgs, move_base_msgs, actionlib, actionlib_msgs, cv_bridge, costmap_2d, image_transport, roslint
   - **Internals:**
