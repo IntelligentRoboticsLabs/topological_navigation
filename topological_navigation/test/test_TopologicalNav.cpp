@@ -155,7 +155,7 @@ TEST(TESTSuite, test_services)
   EXPECT_TRUE(ros::service::waitForService("/topological_navigation/get_location", ros::Duration(2)));
 
   geometry_msgs::Pose pose;
-  pose.orientation = tf2::createQuaternionMsgFromYaw(2.0);
+  pose.orientation = tf2::toMsg(tf2::Quaternion(2.0, 0, 0));
   pose.position.x = 1.0;
 
   topological_navigation_msgs::SetLocation srv_set;
