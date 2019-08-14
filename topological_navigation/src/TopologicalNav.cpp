@@ -105,7 +105,7 @@ geometry_msgs::Pose TopologicalNav::stringToPose(const std::string& coords)
   pose.position.y = ly;
   pose.position.z = 0;
 
-  pose.orientation = tf2::toMsg(tf2::Quaternion(lz, 0, 0));
+  pose.orientation = tf2::toMsg(tf2::Quaternion(0, 0, lz));
 
   return pose;
 }

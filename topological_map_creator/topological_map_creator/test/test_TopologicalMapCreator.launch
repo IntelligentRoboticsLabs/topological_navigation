@@ -1,6 +1,6 @@
 <launch>
   <!--<arg name="map_file" default="$(find sim_navigation)/maps/map.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />-->
-  <node pkg="tf" type="static_transform_publisher" name="bl2map" args="0.0 0.0 0 0 0 0 1 base_link map 100" />
+  <node pkg="tf" type="static_transform_publisher" name="bl2map" args="0.0 0.0 0 0 0 0 1 base_link map" />
   <test test-name="test1" pkg="topological_map_creator" type="topological_map_creator-test" />
 </launch>
