@@ -126,6 +126,7 @@ void TopologicalNav::start_location()
   if (nh_.hasParam(ros::this_node::getName() + "/connections"))
     nh_.getParam(ros::this_node::getName() + "/connections", connections);
 
+  graph_.begin_batch();
   for (int i = 0; i < rooms.size(); i++)
   {
     add_instance("room", rooms[i]);
@@ -186,6 +187,8 @@ void TopologicalNav::start_location()
       add_predicate("free_connected " + rooms[1] + " " + rooms[0]);
     }
   }
+
+  graph_.flush();
 }
 
 }  // namespace topological_navigation
